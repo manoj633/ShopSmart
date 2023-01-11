@@ -1,7 +1,7 @@
 const Product = require("../models/products");
 
 exports.getAddProduct = (req, res, next) => {
-  res.render("admin", { pageTitle: "Add product" });
+  res.render("admin/add-product", { pageTitle: "Add product" });
 };
 
 exports.postAddProduct = (req, res, next) => {

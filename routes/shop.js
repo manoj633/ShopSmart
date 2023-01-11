@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", (req, res, next) => {
   Product.fetchAll((products) => {
-    res.render("shop", { pageTitle: "Shop", prods: products });
+    res.render("shop/shop", { pageTitle: "Shop", prods: products });
   });
 });
 
