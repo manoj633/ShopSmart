@@ -1,5 +1,4 @@
 const Product = require("../models/products");
-const { products } = require("../routes/admin");
 
 exports.getIndex = (req, res, next) => {
   Product.fetchAll((products) => {

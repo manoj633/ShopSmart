@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/admin", adminRoutes.routes);
 app.use("/shop", shopRoutes.routes);
 
-app.use("/", (erq, res, next) => {
+app.use("/", (req, res, next) => {
   res.redirect("/shop/products");
 });
 
