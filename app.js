@@ -10,7 +10,11 @@ const app = new express();
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(adminRoutes.routes);
-app.use(shopRoutes.routes);
+app.use("/admin", adminRoutes.routes);
+app.use("/shop", shopRoutes.routes);
+
+app.use("/", (req, res, next) => {
+  res.redirect("/shop/products");
+});
 
 app.listen(3000);
