@@ -3,8 +3,27 @@
 </head>
 <body>
     <%- include('../includes/navigation.ejs') %>
-    <!-- <form action="/add-product" method="post">
-        <input type="text" name="title">
-        <button type="submit">Add Product</button>
-    </form> -->
+    <% if(prods.length>0) { %>
+          <div class="row">
+                <% for(let product of prods) {%>
+                    <div class="col s12 m6 l3">
+                        <div class="card">
+                            <div class="card-image" >
+                            <img src="<%= product.imageURL %>" style="height: 180px; object-fit: cover;">
+                            <span class="card-title"><%= product.title %></span>
+                            </div>
+                            <div class="card-content" style="max-height: initial;">
+                                <p><%= product.description %></p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">This is a link</a>
+                                <a href="#">This is a link</a>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+    <% } else { %>
+       <h1>No products found</h1>
+    <% } %> 
 <%- include('../includes/end.ejs') %>
