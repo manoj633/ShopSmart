@@ -14,7 +14,7 @@ app.use("/admin", adminRoutes.routes);
 app.use("/shop", shopRoutes.routes);
 
 app.use("/", (req, res, next) => {
-  res.redirect("/shop/products");
+  res.redirect("/shop/");
 });
 
 app.listen(3000);

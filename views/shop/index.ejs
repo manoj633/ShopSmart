@@ -16,8 +16,11 @@
                                 <p><%= product.description %></p>
                             </div>
                             <div class="card-action">
-                                <a href="#">This is a link</a>
-                                <a href="#">This is a link</a>
+                                <form action="/cart" method="post">
+                                    <button class="btn"><a href="/shop/products/<%= product.id %>" style="color: white;">Details</a></button>
+                                    <input type="hidden" name="productID" value="<%= product.id %>">
+                                    <button class="btn" type="submit">Add to cart</button>
+                                </form>
                             </div>
                         </div>
                     </div>
