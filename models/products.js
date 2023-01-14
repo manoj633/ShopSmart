@@ -23,7 +23,6 @@ module.exports = class Product {
 
   save() {
     getProductsFromFile((products) => {
-      console.log(this.id);
       if (this.id) {
         getProductsFromFile((products) => {
           const existingProductIndex = products.findIndex(
@@ -53,6 +52,15 @@ module.exports = class Product {
     getProductsFromFile((products) => {
       const product = products.find((p) => p.id === id);
       cb(product);
+    });
+  }
+
+  static deleteById(id) {
+    getProductsFromFile((products) => {
+      const updatedProducts = products.filter((prod) => prod.id !== id);
+      fs.writeFile(p, JSON.stringify(updatedProducts), (err) => {
+        console.log(err);
+      });
     });
   }
 };
