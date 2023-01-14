@@ -7,7 +7,7 @@
     <form action="/admin/<% if(edit) { %>edit-product<% } else { %>add-product<% } %>" method="post">
             <div>
                 <label for="title">Title:</label>
-                <input type="text" name="title" id="title" value="<% if(edit){ %><%= product.id %><% } %>">
+                <input type="text" name="title" id="title" value="<% if(edit){ %><%= product.title %><% } %>">
             </div>
             <div>
                 <label for="imageURL">ImageURL:</label>
