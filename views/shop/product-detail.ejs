@@ -3,8 +3,18 @@
 </head>
 <body>
     <%- include('../includes/navigation.ejs') %>
-    <!-- <form action="/add-product" method="post">
-        <input type="text" name="title">
-        <button type="submit">Add Product</button>
-    </form> -->
+    <div>
+        <div class='col s12 m6 l3'>
+            <img class="materialboxed" width="650" src="<%= prod.imageURL %>">
+        </div>
+        <div>
+            <h1><%= prod.title %></h1>
+            <p><%= prod.description %></p>
+            <p><%= prod.price %></p>
+        </div>
+    </div>
+    <form action="/shop/cart" method="post">
+        <input type="hidden" name="productID" value="<%= prod.id %>">
+        <button class="btn" type="submit">Add to cart</button>
+    </form>
 <%- include('../includes/end.ejs') %>

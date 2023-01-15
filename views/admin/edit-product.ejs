@@ -3,27 +3,29 @@
 </head>
 <body>
     <%- include('../includes/navigation.ejs') %>
-    <% if(prods.length>0) { %>
-        <div class="row">
-              <% for(let product of prods) {%>
-                  <div class="col s12 m6 l3">
-                      <div class="card">
-                          <div class="card-image" >
-                          <img src="<%= product.imageURL %>" style="height: 180px; object-fit: cover;">
-                          <span class="card-title"><%= product.title %></span>
-                          </div>
-                          <div class="card-content" style="max-height: initial;">
-                              <p><%= product.description %></p>
-                          </div>
-                          <div class="card-action">
-                              <a href="#">Edit</a>
-                              <a href="#">Delete</a>
-                          </div>
-                      </div>
-                  </div>
-              <% } %>
-          </div>
-  <% } else { %>
-     <h1>No products found</h1>
-  <% } %> 
+    <div style="display: flex; flex-direction: column; justify-content: space-evenly; align-items: center; width: 100%; height: 400px;">
+    <form action="/admin/<% if(edit) { %>edit-product<% } else { %>add-product<% } %>" method="post">
+            <div>
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" value="<% if(edit){ %><%= product.title %><% } %>">
+            </div>
+            <div>
+                <label for="imageURL">ImageURL:</label>
+                <input type="text" name="imageURL" value="<% if(edit){ %><%= product.imageURL %><% } %>">
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea type="text" name="description"><% if(edit){ %><%= product.description %><% } %></textarea>
+            </div>
+            <div>
+                <label for="price">Price:</label>
+                <input type="text" name="price" value="<% if(edit){ %><%= product.price %><% } %>">
+            </div>
+            <% if(edit) { %>
+                <input type="hidden" name="productId" value="<%= product.id %>">
+            <% } %>
+        <button type="submit"><% if(edit) { %>Edit<% } else { %>Add<% } %> Product</button>
+        
+    </form>
+</div>
 <%- include('../includes/end.ejs') %>
