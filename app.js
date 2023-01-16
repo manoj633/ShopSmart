@@ -4,7 +4,7 @@ const path = require("path");
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
-const db = require("./util/database");
+const sequelize = require("./util/database");
 
 const app = new express();
 
@@ -17,5 +17,7 @@ app.use("/shop", shopRoutes.routes);
 app.use("/", (req, res, next) => {
   res.redirect("/shop/");
 });
+
+sequelize.sync();
 
 app.listen(3000);
