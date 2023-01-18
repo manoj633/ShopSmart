@@ -8,6 +8,8 @@ const sequelize = require("./util/database");
 
 const Product = require("./models/products");
 const User = require("./models/user");
+const Cart = require("./models/cart");
+const CartItem = require("./models/cart-item");
 
 const app = new express();
 
@@ -30,6 +32,12 @@ app.use("/shop", shopRoutes.routes);
 
 Product.belongsTo(User, { constraint: true, onDelete: "CASCADE" });
 User.hasMany(Product);
+
+User.hasOne(Cart);
+Cart.belongsTo(User);
+
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
 
 app.use("/", (req, res, next) => {
   res.redirect("/shop/");
