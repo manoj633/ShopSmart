@@ -1,5 +1,4 @@
 const Product = require("../models/products");
-const Cart = require("../models/cart");
 
 exports.getIndex = (req, res, next) => {
   Product.findAll()
@@ -100,6 +99,51 @@ exports.postCartDeleteProduct = (req, res, next) => {
     })
     .then(() => {
       res.redirect("/cart");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.postOrder = (req, res, next) => {
+  let fetchedCart;
+  req.user
+    .getCart()
+    .then((cart) => {
+      fetchedCart = cart;
+      return cart.getProducts();
+    })
+    .then((products) => {
+      return req.user
+        .createOrder()
+        .then((order) => {
+          return order.addProducts(
+            products.map((product) => {
+              product.orderItem = { quantity: product.cartItem.quantity };
+              return product;
+            })
+          );
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })
+    .then((result) => {
+      return fetchedCart.setProducts(null);
+    })
+    .then(res.redirect("/"))
+    .catch((err) => console.log(err));
+};
+
+exports.getOrder = (req, res, next) => {
+  req.user
+    .getOrders({ include: ["products"] })
+    .then((orders) => {
+      res.render("shop/orders", {
+        pageTitle: "your orders",
+        path: "/order",
+        orders: orders,
+      });
     })
     .catch((err) => {
       console.log(err);
