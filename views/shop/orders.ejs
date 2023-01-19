@@ -1,0 +1,24 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/styles/form.css">
+</head>
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <% if(orders.length<=0) { %>
+            <h1>No orders found!</h1>
+        <% } else { %>
+            <ul class="collection with-header">
+                <% orders.forEach(order=>{ %>
+                    <li class="collection-header">
+                        <h1>#<%= order.id %></h1>
+                        <ul>
+                            <% order.products.forEach(item=>{%>
+                                <li class="collection-item"><%= item.title %>(<%= item.orderItem.quantity %>)</li>
+                            <% }) %>
+                        </ul>
+                    </li>
+                <% }) %> 
+            </ul>
+        <% } %>
+    </main>
+<%- include('../includes/end.ejs') %>
